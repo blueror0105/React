@@ -19,6 +19,67 @@ export default init => {
 
     /**
       * ------------------------------------
+      * Attribute
+      * ------------------------------------
+      */
+    class Attribute extends Sequelize.Model{}
+    Attribute.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      Name: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      
+      //RELATIONS
+      
+      
+      //EXTERNAL RELATIONS
+      /*
+      */
+    },
+      { sequelize, tableName: "attribute", timestamps: false }
+    );
+
+
+
+    /**
+      * ------------------------------------
+      * Category
+      * ------------------------------------
+      */
+    class Category extends Sequelize.Model{}
+    Category.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      Name: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      
+      //RELATIONS
+        
+      
+      
+      //EXTERNAL RELATIONS
+      /*
+      */
+    },
+      { sequelize, tableName: "category", timestamps: false }
+    );
+
+
+
+    /**
+      * ------------------------------------
       * Product
       * ------------------------------------
       */
@@ -39,16 +100,28 @@ export default init => {
         allowNull: false
       },
       
+      Price: {
+        type: Sequelize.FLOAT
+      },
+      
       Summary: {
         type: Sequelize.STRING
       },
       
       //RELATIONS
         
+        
       
       
       //EXTERNAL RELATIONS
       /*
+      categoryproduct: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: Category,
+          key: '_id',
+        }
+      },
       userproduct: {
         type: Sequelize.INTEGER,
         references: {
@@ -122,6 +195,16 @@ export default init => {
       * Relations many to many
       * ------------------------------------
       */
+
+    
+    
+    Category.belongsToMany(Product, {
+        through: "Category_categoryproduct",
+        as: "categoryproduct",
+        foreignKey: "id_Category",
+        otherKey: "id_Product",
+        timestamps: false
+    });
 
     
     

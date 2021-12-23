@@ -23,6 +23,100 @@ let actionsFunction = {
 
   //CRUD METHODS
 
+  // Create product
+  createProduct: function(product) {
+    return function(dispatch) {
+      return ProductApi
+        .createProduct(product)
+        .then(product => {
+          dispatch(actionsFunction.createProductSuccess(product));
+        })
+        .catch(error => {
+          throw error;
+        });
+    };
+  },
+
+  createProductSuccess: function(product) {
+    return { type: types.CREATE_PRODUCT_SUCCESS, payload: product };
+  },
+
+
+  // Delete product
+  deleteProduct: function(id) {
+    return function(dispatch) {
+      return ProductApi
+        .deleteProduct(id)
+        .then(product => {
+          dispatch(actionsFunction.deleteProductSuccess(product));
+        })
+        .catch(error => {
+          throw error;
+        });
+    };
+  },
+
+  deleteProductSuccess: function(product) {
+    return { type: types.DELETE_PRODUCT_SUCCESS, payload: product };
+  },
+
+
+  // Get product
+  loadProduct: function(id) {
+    return function(dispatch) {
+      return ProductApi
+        .getOneProduct(id)
+        .then(product => {
+          dispatch(actionsFunction.loadProductSuccess(product));
+        })
+        .catch(error => {
+          throw error;
+        });
+    };
+  },
+
+  loadProductSuccess: function(product) {
+    return { type: types.GET_PRODUCT_SUCCESS, payload: product };
+  },
+
+  // Load  list
+  loadProductList: function() {
+    return function(dispatch) {
+      return ProductApi
+        .getProductList()
+        .then(list => {
+          dispatch(actionsFunction.loadProductListSuccess(list));
+        })
+        .catch(error => {
+          throw error;
+        });
+    };
+  },
+
+  loadProductListSuccess: function(list) {
+    return { type: types.LIST_PRODUCT_SUCCESS, payload: list };
+  },
+
+	
+  // Save product
+  saveProduct: function(product) {
+    return function(dispatch) {
+      return ProductApi
+        .saveProduct(product)
+        .then(product => {
+          dispatch(actionsFunction.saveProductSuccess(product));
+        })
+        .catch(error => {
+          throw error;
+        });
+    };
+  },
+
+  saveProductSuccess: function(product) {
+    return { type: types.UPDATE_PRODUCT_SUCCESS, payload: product };
+  },
+
+
 };
 
 export default actionsFunction;

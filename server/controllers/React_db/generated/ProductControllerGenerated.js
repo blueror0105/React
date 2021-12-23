@@ -27,12 +27,96 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/product`;
+    router.post(baseUrl + "", authorize([]), ProductController.create);
+    router.delete(baseUrl + "/:id", authorize([]), ProductController.delete);
+    router.get(baseUrl + "/:id", authorize([]), ProductController.get);
+    router.get(baseUrl + "", authorize([]), ProductController.list);
+    router.post(baseUrl + "/:id", authorize([]), ProductController.update);
   },
 
 
   // CRUD METHODS
 
 
+  /**
+  * ProductModel.create
+  *   @description CRUD ACTION create
+  *
+  */
+  create: async (req, res) => {
+    try {
+      const result = await ProductModel.create(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * ProductModel.delete
+  *   @description CRUD ACTION delete
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await ProductModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * ProductModel.get
+  *   @description CRUD ACTION get
+  *   @returns Product
+  *
+  */
+  get: async (req, res) => {
+    try {
+      const result = await ProductModel.get(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * ProductModel.list
+  *   @description CRUD ACTION list
+  *   @returns ARRAY OF Product
+  *
+  */
+  list: async (req, res) => {
+    try {
+      const result = await ProductModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  
+  /**
+  * ProductModel.update
+  *   @description CRUD ACTION update
+  *   @returns Product
+  *
+  */
+  update: async (req, res) => {
+    try {
+      const result = await ProductModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
   
   // Custom APIs
 

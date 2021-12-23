@@ -27,6 +27,8 @@ import SecurityController from "../controllers/SecurityController";
 import Database_React_db from "./Database_React_db.js";
 
 // Controllers
+import AttributeController from "../controllers/React_db/AttributeController";
+import CategoryController from "../controllers/React_db/CategoryController";
 import ProductController from "../controllers/React_db/ProductController";
 import UserController from "../controllers/React_db/UserController";
 
@@ -106,6 +108,8 @@ class Server {
     SecurityController.init(router);
 
     // Start Init Controllers
+		AttributeController.init(router);
+		CategoryController.init(router);
 		ProductController.init(router);
 		UserController.init(router);
 		 // End Init Controllers

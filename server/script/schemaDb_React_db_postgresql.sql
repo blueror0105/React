@@ -7,12 +7,35 @@ CREATE DATABASE react_db;
 -- ENTITIES
 
 --
+-- Schema entity attribute
+--
+
+CREATE TABLE IF NOT EXISTS "attribute" (
+	Name varchar(130)  NOT NULL,
+	
+	_id SERIAL PRIMARY KEY
+
+);
+
+--
+-- Schema entity category
+--
+
+CREATE TABLE IF NOT EXISTS "category" (
+	Name varchar(130)  NOT NULL,
+	
+	_id SERIAL PRIMARY KEY
+
+);
+
+--
 -- Schema entity product
 --
 
 CREATE TABLE IF NOT EXISTS "product" (
 	Image varchar(130) ,
 	Name varchar(130)  NOT NULL,
+	Price numeric ,
 	Summary varchar(130) ,
 	
 	_id SERIAL PRIMARY KEY
@@ -55,6 +78,13 @@ INSERT INTO "roles" (role, _user, _id) VALUES ('ADMIN', '1', 1);
 
 
 
+
+-- relation m:m categoryproduct Category - Product
+CREATE TABLE IF NOT EXISTS "Category_categoryproduct" (
+    _id SERIAL PRIMARY KEY,
+    id_Category INTEGER  NOT NULL REFERENCES "category"(_id),
+    id_Product INTEGER  NOT NULL REFERENCES "product"(_id)
+);
 
 -- relation 1:m userproduct User - Product
 ALTER TABLE user ADD COLUMN userproduct INTEGER  REFERENCES "product"(_id);

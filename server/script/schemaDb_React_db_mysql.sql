@@ -9,12 +9,37 @@ USE `react_db`;
 -- ENTITIES
 
 --
+-- Struttura della tabella `attribute`
+--
+
+CREATE TABLE IF NOT EXISTS `attribute` (
+	`Name` varchar(130)  NOT NULL,
+	
+	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
+
+);
+
+
+--
+-- Struttura della tabella `category`
+--
+
+CREATE TABLE IF NOT EXISTS `category` (
+	`Name` varchar(130)  NOT NULL,
+	
+	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
+
+);
+
+
+--
 -- Struttura della tabella `product`
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
 	`Image` varchar(130) ,
 	`Name` varchar(130)  NOT NULL,
+	`Price` numeric ,
 	`Summary` varchar(130) ,
 	
 	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
@@ -59,6 +84,13 @@ INSERT INTO `react_db`.`roles` (`role`, `_user`, `_id`) VALUES ('ADMIN', '1', 1)
 
 
 
+
+-- relation m:m categoryproduct Category - Product
+CREATE TABLE IF NOT EXISTS `Category_categoryproduct` (
+    `_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_Category` int(11)  NOT NULL REFERENCES category(_id),
+    `id_Product` int(11)  NOT NULL REFERENCES product(_id)
+);
 
 -- relation 1:m userproduct User - Product
 ALTER TABLE `user` ADD COLUMN `userproduct` int(11)  REFERENCES product(_id);

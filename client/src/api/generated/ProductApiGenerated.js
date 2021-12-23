@@ -26,6 +26,84 @@ class ProductApiGenerated {
 
   // CRUD METHODS
 
+  /**
+  * ProductService.create
+  *   @description CRUD ACTION create
+  *
+  */
+  static createProduct(product) {
+    return axios.post(ProductApiGenerated.contextUrl, product )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
+  /**
+  * ProductService.delete
+  *   @description CRUD ACTION delete
+  *
+  */
+  static deleteProduct(id) {
+    return axios.delete(ProductApiGenerated.contextUrl + "/" + id)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
+  /**
+  * ProductService.get
+  *   @description CRUD ACTION get
+  *   @returns Product
+  *
+  */
+  static getOneProduct(id) {
+    return axios.get(ProductApiGenerated.contextUrl + "/" + id)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
+  /**
+  * ProductService.list
+  *   @description CRUD ACTION list
+  *   @returns ARRAY OF Product
+  *
+  */
+  static getProductList() {
+    return axios.get(ProductApiGenerated.contextUrl)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
+  /**
+  * ProductService.update
+  *   @description CRUD ACTION update
+  *   @returns Product
+  *
+  */
+  static saveProduct(product) {
+    return axios.post(ProductApiGenerated.contextUrl + "/" + product._id, product )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        throw error;
+      });
+  }
+
 
 
     // Custom APIs
